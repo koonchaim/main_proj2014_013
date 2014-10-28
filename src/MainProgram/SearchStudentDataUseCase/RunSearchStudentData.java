@@ -9,18 +9,24 @@ public class RunSearchStudentData {
 		String studentID = "5304106319";
 
 		SearchStudentDataManageMent searchMng = new SearchStudentDataManageMent();
-		MajorBean major = searchMng.findStudentByStudentID(studentID);
-
-		if (major != null) {
-			System.out.println("รหัสประจำตัวนักศึกษา :\t" + major.getEducationLevel().getStudent().getStudentID());
-			System.out.println("ชื่อ - นามสกุล :\t" + major.getEducationLevel().getStudent().getAntecedent() + " "
-					+ major.getEducationLevel().getStudent().getFirstName() + "  " + major.getEducationLevel().getStudent().getLastName());
-			System.out.println("สาขาวิชา :\t\t" + major.getMajorName());
-			System.out.println("ระดับการศึกษา :\t" + major.getEducationLevel().getEducationalBackground() + " "
-					+ major.getEducationLevel().getEducationLevel());
+		if (studentID != null) {
+			MajorBean major = searchMng.findStudentByStudentID(studentID);
+			// แสดงจำนวนมาเข้าแถว
+			int present = searchMng.ListPresent(studentID);
+			// แสดงจำนวนขาดเข้าแถว
+			int lack = searchMng.ListLack(studentID);
+			// แสดงจำนวนลาป่วยเข้าแถว
+			int sickLeave = searchMng.ListSickLeave(studentID);
+			// แสดงจำนวนลากิจเข้าแถว
+			int personalLeave = searchMng.ListPersonalLeave(studentID);
+			// แสดงจำนวนมาสายเข้าแถว
+			int late = searchMng.ListLate(studentID);
+			int calLate = late / 2;
+			int lackLate = lack + calLate;
 		} else {
-			System.out.println("Not StudentId in DataBase");
+			System.out.println("No Data");
 		}
+
 	}
 
 }
